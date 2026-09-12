@@ -15,18 +15,16 @@ A REST API for a simple e-commerce backend, written in Go. Console (admin) and c
 ## Project structure
 
 ```plaintext
-cmd/            entrypoint + app wiring
-config/         env config loading
-constant/       shared + per-domain constants
-internal/http/  handlers (console, customer, media), middleware, request/response DTOs
-internal/model/ gorm models
+cmd/                 entrypoint + app wiring
+config/              env config loading
+constant/            shared + per-domain constants
+internal/http/       handlers (console, customer, media), middleware, request/response DTOs
+internal/model/      gorm models
 internal/repository/ data access
 internal/usecase/    business logic
-lib/            integrations: mysql, cloudinary, jwt, hash, custom_error, custom_validator
-util/           generic helpers
+lib/                 integrations: mysql, cloudinary, jwt, hash, custom_error, custom_validator
+util/                generic helpers
 ```
-
-See `.claude/references/architecture.md` for a more detailed breakdown.
 
 ## Getting started
 
