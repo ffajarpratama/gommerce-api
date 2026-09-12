@@ -27,6 +27,11 @@ var InternalCodeMap = map[int]InternalCode{
 	http.StatusConflict:            DefaultDuplicateDataError,
 }
 
+const (
+	FileUploadMaxSize = 1024 * 1024 * 2    // 2MB
+	FileUploadMaxAge  = 365 * 24 * 60 * 60 // 1 year
+)
+
 func HTTPStatusText(code int) string {
 	switch code {
 	case http.StatusInternalServerError:

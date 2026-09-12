@@ -6,12 +6,16 @@ import (
 	"github.com/spf13/viper"
 )
 
-var GlobalConfig Config
+var (
+	GlobalConfig Config
+	CLDCloudName string
+)
 
 type Config struct {
-	App   App
-	JWT   JWT
-	MySQL MySQL
+	App        App
+	JWT        JWT
+	MySQL      MySQL
+	Cloudinary Cloudinary
 }
 
 type App struct {
@@ -33,6 +37,14 @@ type MySQL struct {
 	DSN      string
 }
 
+type Cloudinary struct {
+	CloudName string
+	APIKey    string
+	APISecret string
+	RootDir   string
+	BaseURL   string
+}
+
 func New() *Config {
 	viper.SetConfigFile(".env")
 	if err := viper.ReadInConfig(); err != nil {
@@ -41,6 +53,8 @@ func New() *Config {
 
 	v := viper.GetViper()
 	viper.AutomaticEnv()
+
+	CLDCloudName = v.GetString("CLOUDINARY_NAME")
 
 	return &Config{
 		App: App{
@@ -58,6 +72,13 @@ func New() *Config {
 			Password: v.GetString("DB_PASSWORD"),
 			Database: v.GetString("DB_DATABASE"),
 			DSN:      v.GetString("DB_DSN"),
+		},
+		Cloudinary: Cloudinary{
+			CloudName: CLDCloudName,
+			APIKey:    v.GetString("CLOUDINARY_API_KEY"),
+			APISecret: v.GetString("CLOUDINARY_API_SECRET"),
+			RootDir:   v.GetString("CLOUDINARY_ROOT_DIR"),
+			BaseURL:   v.GetString("CLOUDINARY_BASE_URL"),
 		},
 	}
 }

@@ -3,6 +3,7 @@ module github.com/ffajarpratama/gommerce-api
 go 1.22.2
 
 require (
+	github.com/cloudinary/cloudinary-go/v2 v2.8.0
 	github.com/fatih/color v1.17.0
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/go-chi/cors v1.2.1
@@ -20,10 +21,12 @@ require (
 
 require (
 	github.com/ajg/form v1.5.1 // indirect
+	github.com/creasty/defaults v1.7.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/gorilla/schema v1.4.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect

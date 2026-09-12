@@ -15,19 +15,25 @@ import (
 	"github.com/ffajarpratama/gommerce-api/internal/http/handler"
 	"github.com/ffajarpratama/gommerce-api/internal/repository"
 	"github.com/ffajarpratama/gommerce-api/internal/usecase"
+	"github.com/ffajarpratama/gommerce-api/lib/cloudinary"
 	"github.com/ffajarpratama/gommerce-api/lib/mysql"
 )
 
 func Exec() error {
 	cnf := config.New()
 
-	mysqlClient, err := mysql.NewMySQLClient(cnf)
+	db, err := mysql.NewMySQLClient(cnf)
 	if err != nil {
 		return err
 	}
 
-	repo := repository.New(mysqlClient)
-	uc := usecase.New(cnf, repo, mysqlClient)
+	cld, err := cloudinary.NewClient(cnf)
+	if err != nil {
+		return err
+	}
+
+	repo := repository.New(db)
+	uc := usecase.New(cnf, repo, db, cld)
 	r := handler.NewHTTPRouter(cnf, uc)
 
 	addr := flag.String("http", fmt.Sprintf(":%d", cnf.App.Port), "HTTP listen address")

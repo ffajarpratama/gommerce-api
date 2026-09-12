@@ -8,6 +8,7 @@ import (
 	"github.com/ffajarpratama/gommerce-api/constant"
 	console_handler "github.com/ffajarpratama/gommerce-api/internal/http/handler/console"
 	customer_handler "github.com/ffajarpratama/gommerce-api/internal/http/handler/customer"
+	media_handler "github.com/ffajarpratama/gommerce-api/internal/http/handler/media"
 	"github.com/ffajarpratama/gommerce-api/internal/http/middleware"
 	"github.com/ffajarpratama/gommerce-api/internal/http/response"
 	"github.com/ffajarpratama/gommerce-api/internal/usecase"
@@ -67,8 +68,7 @@ func NewHTTPRouter(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
 
 	r.Route("/api", func(api chi.Router) {
 		api.Route("/v1", func(v1 chi.Router) {
-			v1.Mount("/console", console_handler.NewHandler(cnf, uc))
-			v1.Mount("/customer", customer_handler.NewHandler(cnf, uc))
+			v1.Mount("/media", media_handler.NewHTTPHandler(cnf, uc))
 		})
 	})
 

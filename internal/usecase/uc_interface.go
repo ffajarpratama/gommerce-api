@@ -13,4 +13,7 @@ type IFaceUsecase interface {
 	Register(ctx context.Context, req *request.Register) (*model.User, error)
 	Login(ctx context.Context, req *request.Login) (*model.User, error)
 	GetProfile(ctx context.Context, userID uuid.UUID) (*model.User, error)
+
+	// media
+	CreateMedia(ctx context.Context, req *request.CreateMedia) (*model.Media, error)
 }

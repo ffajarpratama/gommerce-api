@@ -11,4 +11,7 @@ type IFaceRepository interface {
 	// user
 	CreateUser(ctx context.Context, data *model.User, db *gorm.DB) error
 	FindOneUser(ctx context.Context, query ...interface{}) (*model.User, error)
+
+	// media
+	CreateMedia(ctx context.Context, data *model.Media, db *gorm.DB) error
 }
