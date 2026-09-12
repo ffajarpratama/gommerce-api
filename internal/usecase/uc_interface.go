@@ -16,4 +16,11 @@ type IFaceUsecase interface {
 
 	// media
 	CreateMedia(ctx context.Context, req *request.CreateMedia) (*model.Media, error)
+
+	// product
+	CreateProduct(ctx context.Context, req *request.CreateProduct) error
+	FindAndCountProduct(ctx context.Context, params *request.ListProductQuery) ([]*model.Product, int64, error)
+	FindOneProduct(ctx context.Context, productID uuid.UUID) (*model.Product, error)
+	UpdateProduct(ctx context.Context, req *request.UpdateProduct) error
+	DeleteProduct(ctx context.Context, productID uuid.UUID) error
 }

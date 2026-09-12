@@ -68,6 +68,7 @@ func NewHTTPRouter(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
 
 	r.Route("/api", func(api chi.Router) {
 		api.Route("/v1", func(v1 chi.Router) {
+			v1.Mount("/console", console_handler.NewHTTPHandler(cnf, uc))
 			v1.Mount("/media", media_handler.NewHTTPHandler(cnf, uc))
 		})
 	})

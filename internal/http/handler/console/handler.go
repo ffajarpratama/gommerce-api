@@ -14,7 +14,7 @@ type ConsoleHandler struct {
 	uc  usecase.IFaceUsecase
 }
 
-func NewHandler(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
+func NewHTTPHandler(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
 	r := chi.NewRouter()
 	h := ConsoleHandler{
 		cnf: cnf,
@@ -27,6 +27,18 @@ func NewHandler(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
 		auth.Route("/profile", func(profile chi.Router) {
 			profile.Use(middleware.Authorize(cnf.JWT.Secret))
 			profile.Get("/", h.GetProfile)
+		})
+	})
+
+	r.Group(func(private chi.Router) {
+		private.Use(middleware.Authorize(cnf.JWT.Secret))
+
+		private.Route("/product", func(product chi.Router) {
+			product.Post("/", h.CreateProduct)
+			product.Get("/", h.FindAndCountProduct)
+			product.Get("/{product_id}", h.FindOneProduct)
+			product.Put("/{product_id}", h.UpdateProduct)
+			product.Delete("/{product_id}", h.DeleteProduct)
 		})
 	})
 
