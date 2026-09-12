@@ -14,7 +14,7 @@ type CustomerHandler struct {
 	uc  usecase.IFaceUsecase
 }
 
-func NewHandler(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
+func NewHTTPHandler(cnf *config.Config, uc usecase.IFaceUsecase) http.Handler {
 	r := chi.NewRouter()
 	h := CustomerHandler{
 		cnf: cnf,
