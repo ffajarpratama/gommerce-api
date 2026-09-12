@@ -24,3 +24,8 @@ tmp
 service-account-key.json
 .DS_Store
 .air.toml
+
+.claude
+
+.graphify/
+graphify-out/
